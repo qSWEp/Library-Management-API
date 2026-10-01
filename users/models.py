@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from .validators import SAUDI_PHONE_VALIDATOR
 
 class User(AbstractUser):
+    
     class Role(models.TextChoices):
         MEMBER = 'member', 'Member'
         LIBRARIAN = 'librarian', 'Librarian'
@@ -20,3 +21,19 @@ class User(AbstractUser):
         validators=[SAUDI_PHONE_VALIDATOR],
         unique=True,
     )
+    
+    email = models.EmailField(
+        unique=True,
+    )
+    
+    first_name = models.CharField(
+        max_length=15,  
+    )
+    last_name = models.CharField(
+        max_length=15,
+    )
+    
+
+    REQUIRED_FIELDS = ['email', 'phone', 'first_name', 'last_name'] 
+
+
